@@ -6,5 +6,5 @@ from core.models import Post
 
 class ListarPostsListView(ListView):
     context_object_name = 'posts'
-    template_name = 'blog/post/listarposts.html'
+    template_name = 'index.html'
     queryset = Post.publicados.all()
