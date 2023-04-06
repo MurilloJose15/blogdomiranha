@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+from stdimage import StdImageField
 
 class PublicadosManager(models.Manager):
     def get_queryset(self):
@@ -22,7 +22,14 @@ class Post(models.Model):
     criado = models.DateTimeField(auto_now_add=True)
     publicado = models.DateTimeField(auto_now=True)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts_autor')
-
+    imagem = StdImageField('Imagem', upload_to='posts',
+                           variations={'thumb': {
+                               'width': 440,
+                               'height': 440,
+                               'crop': True
+                           }},
+                           blank=True, null=True
+                           )
     class Meta:
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
