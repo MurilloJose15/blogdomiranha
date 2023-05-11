@@ -2,7 +2,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html  >
+<html >
 <head>
   <!-- Site made with Mobirise Website Builder v5.6.11, https://mobirise.com -->
   <meta charset="UTF-8">
@@ -37,20 +37,20 @@
 {% include 'include/menu.html' %}
 {% block conteudo %}
 
- <section data-bs-version="5.1" class="header2 cid-tzVgfOnXBf mbr-parallax-background" id="header2-0">
-
-
-
-
-    <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(255, 255, 255);"></div>
+ <section data-bs-version="5.1" class="content10 cid-tzVgp39K95" id="content10-1">
 
     <div class="container">
-        <div class="row">
-            <div class="col-12 col-lg-7">
-                <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>Blog do Miranha</strong></h1>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md">
 
-                <p class="mbr-text mbr-fonts-style display-7">Crie posts e compartilhe com seus amigos</p>
-
+                <h6 class="mbr-section-subtitle mbr-fonts-style mb-4 display-5">
+                    Pode navegar a vontade!!!
+                </h6>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <p class="mbr-text mbr-fonts-style display-7">
+                    Fique à vontade para navegar, comentar e compartilhar os meus posts.
+                </p>
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12 col-lg-10">
-                <div class="mbr-section-btn align-center"><a class="btn btn-primary display-4" href="">Learn more</a></div>
+                <div class="mbr-section-btn align-center"><a class="btn btn-primary display-4" href="{% url 'listar_posts' %}">Meus Posts</a></div>
             </div>
         </div>
     </div>
@@ -86,10 +86,9 @@
         </div>
     </div>
     {% endfor %}
-    {% include "include/paginacao.html" with page=page_obj %}
+    {% include "includes/paginacao.html" with page=page_obj %}
 </section>
 
-{% include 'include/footer.html' %}
 
 {% endblock %}
 </body>

@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='imagem',
-            field=stdimage.models.StdImageField(blank=True, force_min_size=False, null=True, upload_to='posts', variations={'thumb': {'crop': True, 'height': 440, 'width': 440}}, verbose_name='Imagem'),
+            field=stdimage.models.StdImageField(blank=True, force_min_size=False, null=True, upload_to='post', variations={'thumb': {'crop': True, 'height': 440, 'width': 440}}, verbose_name='Imagem'),
         ),
     ]
