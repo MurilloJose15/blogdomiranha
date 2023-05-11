@@ -13,6 +13,7 @@
                         <h6 class="card-title mbr-fonts-style display-5">
                             <strong>Comentando Post {{ post.titulo }}</strong>
                         </h6>
+                        {% if user.is_authenticated %}
                         <form class="form form-vertical" action="" method="post">
                             {% csrf_token %}
                             {{ form.as_div }}
@@ -20,6 +21,13 @@
                                 <input class="btn btn-primary" type="submit" value="Enviar">
                             </div>
                         </form>
+                        {% else %}
+                            <h3 class="alert">Página Disponível apenas para Usuários Autenticados</h3>
+                            <h4 class="warning"> Por favor faça login ou cadastre-se. </h4>
+                            <p><a href="{% url 'listar_posts' %}" class="">
+
+                            </a></p>
+                        {% endif %}
                     </div>
                 </div>
             </div>

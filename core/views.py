@@ -1,7 +1,9 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LogoutView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, DetailView, FormView, CreateView
@@ -130,3 +132,9 @@ class LoginUsuarioView(TemplateView):
     def form_invalid(self, form):
         messages.error(self.request, 'Não foi possível logar!')
         return redirect('loginuser')
+
+class LogoutView(LoginRequiredMixin, LogoutView):
+
+    def get(self, request):
+        logout(request)
+        return redirect('listar_posts')
