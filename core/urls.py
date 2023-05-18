@@ -13,5 +13,5 @@ urlpatterns = [
     path('comentar/<int:pk>/', views.ComentarioCreateView.as_view(), name='comentar_post'),
     path('cadusuario/', views.CadUsuarioView.as_view(), name='cadusuario'),
     path('login/', views.LoginUsuarioView.as_view(), name='loginuser'),
-    path('logout/', views.LogoutView.as_view(), name='logoutuser')
+    path('logout/', views.LogoutView.as_view(), name='logoutuser'),
 ]

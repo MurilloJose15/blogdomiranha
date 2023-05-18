@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LogoutView
@@ -17,7 +17,7 @@ class IndexView(TemplateView):
 
 
 class ListarPostsListView(ListView):
-    context_object_name = 'post'
+    context_object_name = 'posts'
     template_name = 'blog/post/listarposts.html'
     queryset = Post.publicados.all()
     paginate_by = 2
@@ -73,9 +73,11 @@ class FormContatoView(FormView):
         return super(FormContatoView, self).form_invalid(form)
 
 
-class ComentarioCreateView(CreateView):
+class ComentarioCreateView(LoginRequiredMixin, CreateView):
     template_name = 'blog/post/comentarios.html'
     form_class = ComentModelForm
+    login_url = 'loginuser'
+
 
     def _get_post(self, id_post):
         try:
@@ -96,7 +98,6 @@ class ComentarioCreateView(CreateView):
         return context
 
 
-
 class CadUsuarioView(CreateView):
     template_name = 'blog/usuarios/cadusuario.html'
     form_class = CadUsuarioForm
@@ -105,15 +106,15 @@ class CadUsuarioView(CreateView):
     def form_valid(self, form):
         form.cleaned_data
         form.save()
-        messages.success(self.request, 'Usuario Cadastrado!')
+        messages.success(self.request, 'Usuario Cadastrado!!!')
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, 'Usuário não Cadastrado!')
+        messages.error(self.request, 'Usuário não cadastrado!!!')
         return super().form_invalid(form)
 
 
-class LoginUsuarioView(TemplateView):
+class LoginUsuarioView(FormView):
     template_name = 'blog/usuarios/login.html'
     model = User
     form_class = AuthenticationForm
@@ -122,7 +123,7 @@ class LoginUsuarioView(TemplateView):
     def form_valid(self, form):
         nome = form.cleaned_data['username']
         senha = form.cleaned_data['password']
-        usuario = authenticate(self.request, username=nome, password=senha)
+        usuario = authenticate(self.request,username=nome, password=senha)
         if usuario is not None:
             login(self.request, usuario)
             return redirect('listar_posts')
@@ -132,6 +133,7 @@ class LoginUsuarioView(TemplateView):
     def form_invalid(self, form):
         messages.error(self.request, 'Não foi possível logar!')
         return redirect('loginuser')
+
 
 class LogoutView(LoginRequiredMixin, LogoutView):
 

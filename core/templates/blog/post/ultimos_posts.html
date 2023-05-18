@@ -1,0 +1,9 @@
+<ul>
+    {% for p in ultimos %}
+    <li>
+        <a href="{% url 'detalhe_post' p.publicado.year p.publicado.month p.publicado.day p.slug %}">
+            {{ p.titulo }} - {{ p.publicado }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>

@@ -22,7 +22,7 @@ class Post(models.Model):
     criado = models.DateTimeField(auto_now_add=True)
     publicado = models.DateTimeField(auto_now=True)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts_autor')
-    imagem = StdImageField('Imagem', upload_to='post',
+    imagem = StdImageField('Imagem', upload_to='posts',
                            variations={'thumb': {
                                                     'width': 438,
                                                     'height': 438,
